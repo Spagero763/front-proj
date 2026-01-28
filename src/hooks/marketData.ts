@@ -8,8 +8,25 @@ interface MarketData {
   error?: string;
 }
 
-export async function fetchMarketData(symbol: string): Promise<MarketData> {
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 1000;
+
+async function fetchWithRetry<T>(
+  fn: () => Promise<T>,
+  retries = MAX_RETRIES,
+  delay = RETRY_DELAY_MS
+): Promise<T> {
   try {
+    return await fn();
+  } catch (error) {
+    if (retries <= 1) throw error;
+    await new Promise(resolve => setTimeout(resolve, delay));
+    return fetchWithRetry(fn, retries - 1, delay * 2); // exponential backoff
+  }
+}
+
+export async function fetchMarketData(symbol: string): Promise<MarketData> {
+  return fetchWithRetry(async () => {
     const response = await fetch(`/api/yahoo-finance?symbols=${symbol}`);
     if (!response.ok) throw new Error("Failed to fetch market data");
 
@@ -33,7 +50,7 @@ export async function fetchMarketData(symbol: string): Promise<MarketData> {
         maximumFractionDigits: 1,
       }).format(volume),
     };
-  } catch (error) {
+  }).catch(error => {
     console.error("Error fetching market data:", error);
     return {
       name: "",
@@ -42,7 +59,7 @@ export async function fetchMarketData(symbol: string): Promise<MarketData> {
       volume: "0",
       error: "Failed to fetch market data",
     };
-  }
+  });
 }
 
 export function useMarketData(symbol: string) {
