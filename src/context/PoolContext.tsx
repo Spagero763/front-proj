@@ -14,7 +14,7 @@ interface PoolContextType {
   lastUpdated: number;
 }
 
-const REFRESH_INTERVAL = 300000; // 30 seconds, adjust as needed
+const REFRESH_INTERVAL = 30000; // 30 seconds
 
 const PoolContext = createContext<PoolContextType | undefined>(undefined);
 
