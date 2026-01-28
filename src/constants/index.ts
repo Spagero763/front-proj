@@ -3,8 +3,8 @@ export const APP_NAME = 'OWN Protocol';
 export const APP_DESCRIPTION = 'Decentralized asset pool and liquidity management protocol';
 
 // Network constants
-export const DEFAULT_CHAIN_ID = 1;
-export const SUPPORTED_CHAINS = [1, 42161, 137];
+export const DEFAULT_CHAIN_ID = 84532; // Base Sepolia
+export const SUPPORTED_CHAINS = [84532]; // Base Sepolia testnet
 
 // UI Constants
 export const TOAST_DURATION = 5000;
