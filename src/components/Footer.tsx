@@ -12,6 +12,7 @@ export function Footer() {
             <Link
               href="https://own-protocol.gitbook.io/docs"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:underline"
             >
               Docs
@@ -19,6 +20,7 @@ export function Footer() {
             <Link
               href="https://x.com/iownco"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:underline"
             >
               X (Twitter)
@@ -26,6 +28,7 @@ export function Footer() {
             <Link
               href="https://t.me/+EX6VZh6rrPc5YmI9"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:underline"
             >
               Telegram
@@ -33,6 +36,7 @@ export function Footer() {
             <Link
               href="https://github.com/own-protocol/own-contracts"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:underline"
             >
               Github
